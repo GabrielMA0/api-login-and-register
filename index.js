@@ -9,6 +9,8 @@ const loginRoutes = require('./routes/loginRoutes');
 
 global.users = [];
 
+const port = process.env.PORT || 3000;
+
 app.engine('handlebars', handlebars.engine({
     defaultLayout: 'main'
 }));
@@ -27,6 +29,6 @@ app.use('/cadastro', cadastroRoutes);
 app.use('/login', loginRoutes);
 
 
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log("Servidor rodando!")
 });
