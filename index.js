@@ -1,33 +1,21 @@
 const express = require('express');
 const app = express();
-const handlebars = require('express-handlebars')
-const bodyParser = require('body-parser')
-const cadastroRoutes = require('./routes/cadastroRoutes');
+const usersRoutes = require('./routes/usersRoutes');
 const loginRoutes = require('./routes/loginRoutes');
-// Config
-// Template Engine
 
 global.users = [];
 
 const port = process.env.PORT || 3000;
 
-app.engine('handlebars', handlebars.engine({
-    defaultLayout: 'main'
-}));
-app.set('view engine', 'handlebars');
-
-// Body Parser
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-
+// Middleware para parsear JSON
+app.use(express.json());
 // Rotas
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/html/index.html')
+    res.send('Teste de Api');
 })
 
-app.use('/cadastro', cadastroRoutes);
+app.use('/users', usersRoutes);
 app.use('/login', loginRoutes);
-
 
 app.listen(port, () => {
     console.log("Servidor rodando!")
