@@ -29,12 +29,12 @@ Este é um projeto back-end desenvolvido com Node.js. Sem utilização de banco 
   - **Body**:
     ```json
     {
-    "name": "string",
-    "lastName": "string",
-    "age": number,
-    "email": "string",
-    "password": "string"
-}
+    "name": "Isaac",
+    "lastName": "Tiago Jorge Bernardes",
+    "age": 23,
+    "email": "isaac_bernardes@proshock.com.br",
+    "password": "Teste123"
+    }
     ```
 
 - **`/users/change-password/:id` (PUT)**  
@@ -43,7 +43,7 @@ Este é um projeto back-end desenvolvido com Node.js. Sem utilização de banco 
   - **Body**:
     ```json
     {
-    "password": "caio123"
+    "password": "12345"
     }
     ```
 
@@ -52,8 +52,8 @@ Este é um projeto back-end desenvolvido com Node.js. Sem utilização de banco 
   - **Body**:
     ```json
     {
-      "email": "string",
-      "password": "string"
+      "email": "isaac_bernardes@proshock.com.br",
+      "password": "12345"
     }
     ```
 
