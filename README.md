@@ -61,6 +61,6 @@ Este é um projeto back-end desenvolvido com Node.js. Sem utilização de banco 
 
 - Node.js
 - Express
-- Yup
+- Zod
 - bcrypt
 - uuid
