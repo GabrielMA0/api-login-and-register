@@ -1,12 +1,24 @@
 const { v4: uuidv4 } = require('uuid');
 const encryptPassword = require('../utils/encryptPassword')
+import { z } from 'zod';
 
 const register = async (req) => {
-    try {
-        const { name, lastName, age, email, password } = req;
+    const { name, lastName, age, email, password } = req;
 
-        if (!name || !lastName || !email || !password) {
-            return { message: 'Parâmetros inválidos ou ausentes', success: false, status: 400 };
+    const schema = z.object({
+        name: z.string().min(1, 'Nome obrigatório'),
+        lastName: z.string().min(1, 'Sobrenome obrigatório'),
+        age: z.number().optional().or(z.nan().transform(() => 'a idade precisa ser número')),
+        email: z.string().email('Email inválido').min(1, 'Email obrigatório'),
+        password: z.string().min(1, 'Senha é obrigatória')
+    });
+
+    try {
+        const validation = schema.safeParse({ name, lastName, age, email, password });
+
+        if (!validation.success) {
+            console.error('Erro na validação:', validation.error.format());
+            return { message: validation.error.format(), success: false, status: 400 };
         }
 
         const userExists = global.users.some(user => user.email === email);
@@ -16,7 +28,6 @@ const register = async (req) => {
         }
 
         const encryptedPassword = await encryptPassword(password);
-
         const uniqueId = uuidv4();
         const ageNumber = isNaN(parseInt(age)) ? 0 : parseInt(age);
 
@@ -38,8 +49,9 @@ const register = async (req) => {
 
     } catch (error) {
         console.error('Erro no cadastro:', error);
-        return { message: 'Erro interno no servidor', success: false, status: 500 };
+        return { message: 'Erro no servidor', success: false, status: 500 };
     }
+
 };
 
 const deleteUser = (id) => {

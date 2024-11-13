@@ -1,16 +1,21 @@
 const bcrypt = require('bcrypt');
-const yup = require('yup');
+import { z } from 'zod';
 
 const LogIn = async (req) => {
     const { email, password } = req;
 
-    const schema = yup.object().shape({
-        email: yup.string().email().required('Email obrigatório'),
-        password: yup.string().required('Senha é obrigatória')
+    const schema = z.object({
+        email: z.string().email('Email inválido').min(1, 'Email obrigatório'),
+        password: z.string().min(1, 'Senha é obrigatória')
     });
 
     try {
-        await schema.validate({ email, password });
+        const validation = schema.safeParse({ email, password });
+
+        if (!validation.success) {
+            console.log(validation.error.format());
+            return false;
+        }
 
         const user = global.users.find(user => user.email === email);
 
@@ -21,9 +26,10 @@ const LogIn = async (req) => {
 
         throw new Error('Usuário não encontrado');
     } catch (err) {
-        console.log(err.errors);
+        console.log(err.message || 'Erro desconhecido');
         return false;
     }
+
 }
 
 module.exports = LogIn
