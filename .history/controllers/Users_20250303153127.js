@@ -1,6 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 const encryptPassword = require('../utils/encryptPassword')
-const { z } = require('zod');
+import { z } from 'zod';
 
 const register = async (req) => {
     const { name, lastName, age, email, password } = req;

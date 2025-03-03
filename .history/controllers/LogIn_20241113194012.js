@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { z } = require('zod');
+import { z } from 'zod';
 
 const LogIn = async (req) => {
     const { email, password } = req;
