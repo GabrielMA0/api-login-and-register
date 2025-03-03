@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const { z } = require('zod');
 
 const LogIn = async (req) => {
