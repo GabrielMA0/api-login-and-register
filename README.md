@@ -11,6 +11,8 @@ Este é um projeto back-end desenvolvido com Node.js. Sem utilização de banco 
 - Consultar todos os usuários
 - Consultar usuário específico por ID
 
+## URL: https://api-login-and-register.onrender.com
+
 ## Rotas
 
 - **`/users` (GET)**  
@@ -62,5 +64,5 @@ Este é um projeto back-end desenvolvido com Node.js. Sem utilização de banco 
 - Node.js
 - Express
 - Zod
-- bcrypt
+- bcryptjs
 - uuid
